@@ -4,7 +4,6 @@ if(uri_string()!=""){
   $hlm = ucwords(uri_string());
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,47 +45,11 @@ if(uri_string()!=""){
 </head>
 
 <body>
+  <main>
 
-<?= $this->include('components/header') ?>
-
-<?= $this->include('components/sidebar') ?>
-
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Data Tables</h1>
-      <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Home</li>
-            <?php
-                if($hlm!="Home"){
-                ?>
-                <li class="breadcrumb-item"><?php echo $hlm?></li> 
-                <?php
-                }
-            ?> 
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-
-          <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><?php echo $hlm?></h5>
-                <?= $this->renderSection('content') ?>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
+      <?= $this->renderSection('content') ?>
 
   </main><!-- End #main -->
-
-  <?= $this->include('components/footer') ?>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
