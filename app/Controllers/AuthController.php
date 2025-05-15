@@ -5,11 +5,17 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
+use App\Models\UserModel; 
+
 class AuthController extends BaseController
 {
+
+    protected $user;
+
     function __construct()
     {
         helper('form');
+        $this->user= new UserModel();
     }
 
     public function login()
@@ -18,10 +24,9 @@ class AuthController extends BaseController
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
 
-            $dataUser = ['username' => 'wisnu', 'password' => '827ccb0eea8a706c4c34a16891f84e7b', 'role' => 'admin']; // passw 12345
-
-            if ($username == $dataUser['username']) {
-                if (md5($password) == $dataUser['password']) {
+            $dataUser = $this->user->where(['username' => $username])->first(); //1234567
+                if ($dataUser) {
+                    if (password_verify($password, $dataUser['password'])) {
                     session()->set([
                         'username' => $dataUser['username'],
                         'role' => $dataUser['role'],
@@ -42,7 +47,7 @@ class AuthController extends BaseController
         }
     }
     
-        public function Logout()
+        public function logout()
     {
         session()->destroy();
         return redirect()->to('login');
