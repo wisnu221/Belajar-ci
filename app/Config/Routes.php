@@ -39,3 +39,8 @@ $routes->get('Logout', 'AuthController::Logout');
 $routes->get('produk', 'ProdukController::index', ['filter' => 'auth']);
 $routes->get('keranjang', 'TransaksiController::index', ['filter' => 'auth']);
 
+$routes->get('profile', 'ProfilController::index', ['filter' => 'auth']);
+$routes->get('profil', 'Home::history', ['filter' => 'auth']);
+
+$routes->resource('api', ['controller' => 'apiController']);
+
